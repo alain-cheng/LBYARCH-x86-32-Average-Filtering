@@ -4,10 +4,11 @@
 extern void imgAvgFilter(int* input_image, int* filtered_image, int image_size_x, int image_size_y, int sampling_window_size);
 
 int main() {
-	int x, y, n; 	// image size x and y + the sampling window size (n)
+	int x, y, total; 	// image size x and y + the sampling window size (n)
 	int i, j;
 	int* input_image;
 	int* filtered_image;
+	int n = 3;
 	
 	// TODOs: initialize variables
 	printf("Enter x size of picture: ");
@@ -15,10 +16,10 @@ int main() {
 	
 	printf("Enter y size of picture: ");
 	scanf("%d", &y);
-	n = x*y; // total size of picture
+	total = x*y; // total size of picture
 	
-	input_image = (int*)malloc(n*sizeof(*input_image));
-	filtered_image = (int*)malloc(n*sizeof(*filtered_image));
+	input_image = (int*)malloc(total*sizeof(*input_image));
+	filtered_image = (int*)malloc(total*sizeof(*filtered_image));
 	
 	/* 
 	 * TODO:
