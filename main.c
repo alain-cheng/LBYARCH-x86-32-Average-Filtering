@@ -4,18 +4,18 @@
 extern void imgAvgFilter(int* input_image, int* filtered_image, int image_size_x, int image_size_y, int sampling_window_size);
 
 int main() {
-	int x, y, total; 	// image size x and y + the sampling window size (n)
+	int x = 3, y = 3, n = 3; 	// image size x and y + the sampling window size (n)
 	int i, j;
 	int* input_image;
 	int* filtered_image;
-	int n = 3;
+	int total;
 	
 	// TODOs: initialize variables
-	printf("Enter x size of picture: ");
-	scanf("%d", &x);
+	//printf("Enter x size of picture: ");
+	//scanf("%d", &x);
 	
-	printf("Enter y size of picture: ");
-	scanf("%d", &y);
+	//printf("Enter y size of picture: ");
+	//scanf("%d", &y);
 	total = x*y; // total size of picture
 	
 	input_image = (int*)malloc(total*sizeof(*input_image));
@@ -32,12 +32,19 @@ int main() {
 		}
 	}
 	
+	// debugging
+	for(i = 0; i < x; i++) {
+		for(j = 0; j < y; ++j) {
+			printf("%d ", *(input_image + (i*x) + j));
+		}
+		printf("\n");
+	}
 	 
 	// call
-	imgAvgFilter(input_image, filtered_image, x, y, n);
-	
+	//imgAvgFilter(input_image, filtered_image, x, y, n);
 	
 	// TODO: Print filtered_image
+	/*
 	for(i=0; i<x; i++) {
 		
 		for(j=0; j<y; j++) {
@@ -45,4 +52,5 @@ int main() {
 		}
 		printf("\n");
 	}
+	*/
 }
