@@ -83,11 +83,11 @@ L2:
 
 **Assembling, Compiling, and Linking**
 ```
-nasm -f win32 <assembly file>.asm
+nasm -f win32 imgAvgFilter.asm
 
-gcc -c <c file>.c -o <c file>.obj -m32
+gcc -c main.c -o main.obj -m32
 
-gcc <c file>.obj <asm file>.obj -o <c file>.exe -m32
+gcc main.obj imgAvgFilter.obj -o main.exe -m32
 
-<c file>.exe
+main.exe
 ```
