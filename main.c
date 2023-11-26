@@ -11,11 +11,23 @@ int main() {
 	int total;
 	
 	// TODOs: initialize variables
-	printf("Enter x size of picture: ");
-	scanf("%d", &x);
+	do{
+		printf("Enter x size of picture: ");
+		scanf("%d", &x);
+		if(x < 3){
+			printf("Invalid size of x.\n");
+		}
+	}while(x < 3);
 	
-	printf("Enter y size of picture: ");
-	scanf("%d", &y);
+	do{
+		printf("Enter y size of picture: ");
+		scanf("%d", &y);
+		
+		if(y < 3){
+			printf("Invalid size of y.\n");
+		}
+	}while(y < 3);
+	
 	total = x*y; // total size of picture
 	
 	input_image = (int*)malloc(total*sizeof(*input_image));
