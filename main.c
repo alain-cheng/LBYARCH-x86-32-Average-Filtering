@@ -4,7 +4,7 @@
 extern void imgAvgFilter(int* input_image, int* filtered_image, int image_size_x, int image_size_y, int sampling_window_size);
 
 int main() {
-	int x = 3, y = 3, n = 9; 	// image size x and y + the sampling window size (n)
+	int x, y, n = 9; 	// image size x and y + the sampling window size (n)
 	int i, j;
 	int* input_image;
 	int* filtered_image;
@@ -26,17 +26,17 @@ int main() {
 	 * Populate input_image here
 	 **/
 	printf("Enter the %d values of the picture: ", total);
-	for(i = 0; i < x; ++i) {
-		for(j = 0; j < y; ++j) {
-			scanf("%d", input_image + (i*x) + j);
+	for(i = 0; i < y; ++i) {
+		for(j = 0; j < x; ++j) {
+			scanf("%d", input_image + (i*y) + j);
 		}
 	}
 	
 	// debugging
 	printf("Input Image: \n");
-	for(i = 0; i < x; i++) {
-		for(j = 0; j < y; ++j) {
-			printf("%d ", *(input_image + (i*x) + j));
+	for(i = 0; i < y; i++) {
+		for(j = 0; j < x; j++) {
+			printf("%d ", *(input_image + (i*y) + j));
 		}
 		printf("\n");
 	}
