@@ -1,6 +1,41 @@
 # LBYARCH-x86-32-Average-Filtering
 
-**DRAFT: Performing an avergae filtering on an image**
+## Copy-Pasteables
+
+**Assembling, Compiling, and Linking**
+```
+nasm -f win32 imgAvgFilter.asm
+gcc -c main.c -o main.obj -m32
+gcc main.obj imgAvgFilter.obj -o imgAvgFilter.exe -m32
+imgAvgFilter.exe
+
+```
+
+**Test Cases**
+```
+3
+3
+6 7 2 8 3 4 5 6 9
+
+```
+
+```
+4
+3
+3 7 8 9 2 3 4 9 1 9 2 2
+
+```
+
+```
+6
+3
+1 7 2 6 3 4 5 9 1 8 2 7 8 9 3 9 9 1
+
+```
+
+## DRAFT
+
+**Performing an avergae filtering on an image**
 
  (*simplified: no traversal*)
 
@@ -80,14 +115,3 @@ L2:
 ```
 
 ![tis an image](./imgs/sampleA.png)
-
-**Assembling, Compiling, and Linking**
-```
-nasm -f win32 imgAvgFilter.asm
-
-gcc -c main.c -o main.obj -m32
-
-gcc main.obj imgAvgFilter.obj -o imgAvgFilter.exe -m32
-
-imgAvgFilter.exe
-```
