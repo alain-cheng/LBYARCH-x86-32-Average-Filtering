@@ -4,11 +4,11 @@
 extern void imgAvgFilter(int* input_image, int* filtered_image, int image_size_x, int image_size_y, int sampling_window_size);
 
 int main() {
-	int x, y, total; 	// image size x and y + the sampling window size (n)
+	int x, y, n = 9; 	// image size x and y + the sampling window size (n)
 	int i, j;
 	int* input_image;
 	int* filtered_image;
-	int n = 3;
+	int total;
 	
 	// TODOs: initialize variables
 	printf("Enter x size of picture: ");
@@ -25,24 +25,34 @@ int main() {
 	 * TODO:
 	 * Populate input_image here
 	 **/
-	printf("Enter values of the picture: ");
-	for(i = 0; i < x; ++i) {
-		for(j = 0; j < y; ++j) {
-			scanf("%d", input_image + (i*x) + j);
+	printf("Enter the %d values of the picture: ", total);
+	for(i = 0; i < y; ++i) {
+		for(j = 0; j < x; ++j) {
+			scanf("%d", input_image + (i*y) + j);
 		}
 	}
 	
+	// debugging
+	printf("Input Image: \n");
+	for(i = 0; i < y; i++) {
+		for(j = 0; j < x; j++) {
+			printf("%d ", *(input_image + (i*y) + j));
+		}
+		printf("\n");
+	}
+	
+	printf("\n");
 	 
 	// call
 	imgAvgFilter(input_image, filtered_image, x, y, n);
 	
-	
 	// TODO: Print filtered_image
+	printf("Filtered Image: \n");
 	for(i=0; i<x; i++) {
-		
 		for(j=0; j<y; j++) {
 			printf("%d ", *(filtered_image + (i*x) + j));
 		}
 		printf("\n");
 	}
+	
 }
