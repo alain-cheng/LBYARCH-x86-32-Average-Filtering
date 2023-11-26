@@ -60,8 +60,8 @@ int main() {
 	
 	// TODO: Print filtered_image
 	printf("Filtered Image: \n");
-	for(i=0; i<x; i++) {
-		for(j=0; j<y; j++) {
+	for(i=0; i<y; i++) {
+		for(j=0; j<x; j++) {
 			printf("%d ", *(filtered_image + (i*x) + j));
 		}
 		printf("\n");
