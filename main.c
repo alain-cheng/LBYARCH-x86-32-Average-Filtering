@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
-
 extern void imgAvgFilter(int* input_image, int* filtered_image, int image_size_x, int image_size_y, int sampling_window_size);
-
 int main() {
 	int x, y, n = 9; 	// image size x and y + the sampling window size (n)
 	int i, j;
@@ -57,7 +55,7 @@ int main() {
 	 
 	// call
 	imgAvgFilter(input_image, filtered_image, x, y, n);
-	
+
 	// TODO: Print filtered_image
 	printf("Filtered Image: \n");
 	for(i=0; i<y; i++) {
