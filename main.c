@@ -38,8 +38,8 @@ int main() {
 	 * Populate input_image here
 	 **/
 	printf("Enter the %d values of the picture: ", total);
-	for(i = 0; i < y; ++i) {
-		for(j = 0; j < x; ++j) {
+	for(i = 0; i < x; ++i) {
+		for(j = 0; j < y; ++j) {
 			scanf("%d", input_image + (i*y) + j);
 		}
 	}
@@ -48,7 +48,7 @@ int main() {
 	printf("Input Image: \n");
 	for(i = 0; i < y; i++) {
 		for(j = 0; j < x; j++) {
-			printf("%d ", *(input_image + (i*y) + j));
+			printf("%d ", *(input_image + (i*x) + j));
 		}
 		printf("\n");
 	}
