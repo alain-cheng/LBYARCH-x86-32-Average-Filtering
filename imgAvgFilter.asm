@@ -84,10 +84,10 @@ SamplingLoop:
     xor edx, edx            ; Clear EDX for division
     mov dx, 9 				; divisor - size of box
 	shr dx, 1
-	add ax, dx				
+	add ax, dx				; add divisor/2 to dividend - combined total of numbers
 	
-	mov dl, 9 ;[divisor]
-    div dl
+	mov dl, 9 				; divisor
+    div dl					; average
     ; Finding the middle of the sampling window          
     mov edi, [ebp+12]       ; filtered_image
     add edi, ebx            ; move edi 1 pixel down
@@ -110,7 +110,7 @@ SamplingLoop:
     cmp ch, 0
 jne SamplingLoop
 
-    call restore_borders
+    call restore_borders ; restore borders after averaging
     
 return:                                   
     mov esp, ebp
@@ -129,22 +129,22 @@ populate: ; initializes filtered_image
     
 restore_borders: ; restores the left and right borders from input image
     ; left corner focus
-	mov esi, [ebp+8]
+	mov esi, [ebp+8] ; reset esi and edi to original positions
 	mov edi, [ebp+12]
 	
 	mov ecx, [y_size]
 	
-	mov ebx, [y_traverse]
+	mov ebx, [y_traverse] ; enough bits for next row
 	
     p_L2: ; focuses on left corner
     mov edx, [esi]
     mov dword [edi], edx
-	add esi, ebx
+	add esi, ebx ; y-traverse
     add edi, ebx
     loop p_L2
 	
 	; right corner focus
-	mov esi, [ebp+8]
+	mov esi, [ebp+8] ; reset esi and edi to original positions
 	mov edi, [ebp+12]
 	
 	mov ecx, [y_size]
@@ -155,7 +155,7 @@ restore_borders: ; restores the left and right borders from input image
 	mov ebx, edx
 	add esi, ebx
 	add edi, ebx
-	sub edi, 4
+	sub edi, 4 ; x-size*4 - 4 (to account for excess position bits)
 	sub esi, 4
 	
 	mov ebx, [y_traverse]
@@ -163,7 +163,7 @@ restore_borders: ; restores the left and right borders from input image
 	p_L3: ; focuses on right corner
     mov edx, [esi]
     mov dword [edi], edx
-	add esi, ebx
+	add esi, ebx ; y-traverse
     add edi, ebx
     loop p_L3
 	
