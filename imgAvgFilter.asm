@@ -7,7 +7,7 @@ total dd 0
 sampling dd 3
 x_traverse dd 0
 y_traverse dd 0
-counter db 1
+counter db 1                        ; To keep track of the # of cycles for the SamplingLoop
 segment .text
 _imgAvgFilter:
     push ebp
@@ -52,10 +52,14 @@ _imgAvgFilter:
     ; TODOs: Logic for average filtering
     mov esi, [ebp+8]	           ; input_image
     mov edi, [ebp+12]	           ; filtered_image
-    mov ebx, [y_traverse]
-    mov ch, [x_size]                ; number of samplings needed for the image horizontally (x - 2)
+    mov al, [x_size]
+    mov bl, [y_size]
+    sub bl, 2
+    mul bl
+    mov ch, al                  ; number of samplings needed [x*(y-2)] - 2
     sub ch, 2
-L1: 
+    mov ebx, [y_traverse]
+SamplingLoop: 
     ; Sampling Window Segment
     mov dx, [esi+0]             ; 1st pixel
     add ax, dx                  ; Sum collector
@@ -79,7 +83,7 @@ L1:
     ; Averaging Segment
     xor edx, edx            ; Clear EDX for division
     mov dl, [divisor]       ; Load the divisor
-    div dl      
+    div dl
     ; Finding the middle of the sampling window          
     mov edi, [ebp+12]       ; filtered_image
     add edi, ebx            ; move edi 1 pixel down
@@ -90,7 +94,7 @@ L1:
         cmp cl, 0
         jne move_right
     
-    mov [edi], al           ; Insert value in the middle of the sampling window
+    mov byte [edi], 8;al           ; Insert value in the middle of the current sampling window
     
     ; move sampling window to the right by 1 px and clear some registers for the next pass
     add esi, 4
@@ -100,7 +104,9 @@ L1:
     ; loop again
     dec ch
     cmp ch, 0
-jne L1
+jne SamplingLoop
+
+    call restore_borders
     
 return:                                   
     mov esp, ebp
@@ -115,4 +121,7 @@ populate: ; initializes filtered_image
     add esi, 4
     add edi, 4
     loop p_L1
+    ret 0
+    
+restore_borders:
     ret 0
