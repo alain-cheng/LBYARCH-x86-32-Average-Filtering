@@ -82,7 +82,11 @@ SamplingLoop:
     
     ; Averaging Segment
     xor edx, edx            ; Clear EDX for division
-    mov dl, [divisor]       ; Load the divisor
+    mov dx, 9 				; divisor - size of box
+	shr dx, 1
+	add ax, dx				
+	
+	mov dl, 9 ;[divisor]
     div dl
     ; Finding the middle of the sampling window          
     mov edi, [ebp+12]       ; filtered_image
@@ -94,7 +98,7 @@ SamplingLoop:
         cmp cl, 0
         jne move_right
     
-    mov byte [edi], 8;al           ; Insert value in the middle of the current sampling window
+    mov byte [edi], al           ; Insert value in the middle of the current sampling window
     
     ; move sampling window to the right by 1 px and clear some registers for the next pass
     add esi, 4
