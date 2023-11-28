@@ -127,5 +127,45 @@ populate: ; initializes filtered_image
     loop p_L1
     ret 0
     
-restore_borders:
+restore_borders: ; restores the left and right borders from input image
+    ; left corner focus
+	mov esi, [ebp+8]
+	mov edi, [ebp+12]
+	
+	mov ecx, [y_size]
+	
+	mov ebx, [y_traverse]
+	
+    p_L2: ; focuses on left corner
+    mov edx, [esi]
+    mov dword [edi], edx
+	add esi, ebx
+    add edi, ebx
+    loop p_L2
+	
+	; right corner focus
+	mov esi, [ebp+8]
+	mov edi, [ebp+12]
+	
+	mov ecx, [y_size]
+	
+	mov ebx, [x_size]
+	mov eax, 4
+	mul ebx
+	mov ebx, edx
+	add esi, ebx
+	add edi, ebx
+	sub edi, 4
+	sub esi, 4
+	
+	mov ebx, [y_traverse]
+	
+	p_L3: ; focuses on right corner
+    mov edx, [esi]
+    mov dword [edi], edx
+	add esi, ebx
+    add edi, ebx
+    loop p_L3
+	
+	
     ret 0
