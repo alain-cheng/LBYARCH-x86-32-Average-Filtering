@@ -38,7 +38,12 @@ int main() {
 	printf("Enter the %d values of the picture: ", total);
 	for(i = 0; i < x; ++i) {
 		for(j = 0; j < y; ++j) {
-			scanf("%d", input_image + (i*y) + j);
+			while(*(input_image +(i*y) + j) < 0 || *(input_image +(i*y) + j) > 255){
+				scanf("%d", input_image + (i*y) + j);
+				if(*(input_image +(i*y) + j) < 0|| *(input_image +(i*y) + j) > 255){
+					printf("Invalid! Please enter a number between 0 and 255.\n");
+				}
+			}
 		}
 	}
 	
@@ -46,7 +51,7 @@ int main() {
 	printf("Input Image: \n");
 	for(i = 0; i < y; i++) {
 		for(j = 0; j < x; j++) {
-			printf("%d ", *(input_image + (i*x) + j));
+			printf("%d\t", *(input_image + (i*x) + j));
 		}
 		printf("\n");
 	}
@@ -60,7 +65,7 @@ int main() {
 	printf("Filtered Image: \n");
 	for(i=0; i<y; i++) {
 		for(j=0; j<x; j++) {
-			printf("%d ", *(filtered_image + (i*x) + j));
+			printf("%d\t", *(filtered_image + (i*x) + j));
 		}
 		printf("\n");
 	}
