@@ -59,6 +59,8 @@ _imgAvgFilter:
     mov ch, al                  ; number of samplings needed [x*(y-2)] - 2
     sub ch, 2
     mov ebx, [y_traverse]
+    
+    xor eax, eax
 SamplingLoop: 
     ; Sampling Window Segment
     mov dx, [esi+0]             ; 1st pixel
